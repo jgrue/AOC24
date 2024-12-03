@@ -1,6 +1,6 @@
 
 # python training 
-# code of advent 2024 - day 1
+# code of advent 2024 - day 2
 
 # Importing the re module
 import re
