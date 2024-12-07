@@ -14,13 +14,35 @@ sum = 0
 
 def checkEquasion(result, operands):
 
+    
+    print("\n")
+    print(f"Checking: {result} - {operands}")
+
     ops = operands.copy()
     first = ops.pop(0)
 
     if(computeTerm(result, first, ops)):
         return True
 
+    #ops = operands.copy()
+    #if(len(ops)>1):    
+        
+    #    #concat
+    #    for pos in range(len(ops)-1):
+
+    #        newOps = operands.copy()
+
+    #        leftOp = newOps.pop(pos)      
+    #        rightOp = newOps.pop(pos)
+    #        newNum = int(str(leftOp)+str(rightOp))
+                        
+    #        newOps.insert(pos, newNum)
+            
+    #        if(checkEquasion(result, newOps)):
+    #            return True
+
     return False
+
 
 def computeTerm(targetResult, currentResult, operands):
 
@@ -37,21 +59,16 @@ def computeTerm(targetResult, currentResult, operands):
     newResult = currentResult + nextValue
     if(computeTerm(targetResult, newResult, ops )):
         return True
-    
-    # subtraction
-    #newResult = currentResult - nextValue
-    #if(computeTerm(targetResult, newResult, ops )):
-    #    return True
-    
+      
     # multiply
     newResult = currentResult * nextValue
     if(computeTerm(targetResult, newResult, ops )):
         return True
-    
-    # division
-    #newResult = currentResult / nextValue
-    #if(computeTerm(targetResult, newResult, ops )):
-    #    return True
+     
+    #concat
+    newNum = int(str(currentResult)+str(nextValue))
+    if(computeTerm(targetResult, newNum, ops )):
+            return True
 
     return False
 
