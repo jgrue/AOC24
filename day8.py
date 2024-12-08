@@ -33,15 +33,31 @@ for row in range(maxRows):
 
 def computeNode(a,b):
 
+    newNodes = []
+    newNodes.append(a)
+
     aR = a[0]
     aC = a[1]
+
     bR = b[0]
     bC = b[1]
 
-    newC = aC - (bC - aC)
-    newR = aR - (bR - aR)
+    deltaR = (bR - aR)
+    deltaC = (bC - aC)    
 
-    return (newR, newC)
+    factor = 1
+    while(1):
+
+        newR = aR - deltaR*factor
+        newC = aC - deltaC*factor
+
+        if(isInside((newR,newC)) == False):
+            break
+        
+        newNodes.append((newR,newC))       
+        factor += 1
+
+    return newNodes
 
 
 
@@ -56,8 +72,8 @@ def computeNodes(positions, nodes):
     for x in range(len(posCopy)):
         b = posCopy[x]
 
-        nodes.append(computeNode(a,b))
-        nodes.append(computeNode(b,a))
+        nodes.extend(computeNode(a,b))
+        nodes.extend(computeNode(b,a))
 
     computeNodes(posCopy, nodes)
 
